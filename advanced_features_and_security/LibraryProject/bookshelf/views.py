@@ -1,7 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import permission_required, login_required
 from .models import Book, Article
-from .forms import BookForm, SearchForm
+from .forms import ExampleForm, BookForm, SearchForm
+
+def example_view(request):
+    form = ExampleForm()
+    return render(request, "example.html", {"form": form})
+
 
 def book_list(request):
     form = SearchForm(request.GET)
