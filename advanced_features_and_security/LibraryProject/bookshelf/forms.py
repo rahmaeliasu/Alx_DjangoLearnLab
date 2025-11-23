@@ -12,3 +12,7 @@ class SearchForm(forms.Form):
     def clean_q(self):
         q = self.cleaned_data.get("q", "")
         return q.strip()
+
+class ExampleForm(forms.Form):
+    name = forms.CharField(max_length=100)
+    email = forms.EmailField()
