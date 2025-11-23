@@ -23,7 +23,27 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-9hm9x4(aps!%hws_sx5jzcrf06*ep^+%rwlm$6c+e-o5t=fr#j"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+
+# Cookie & SSL
+SESSION_COOKIE_SECURE = True        # cookies only over HTTPS
+CSRF_COOKIE_SECURE = True           # CSRF cookie only over HTTPS
+CSRF_COOKIE_HTTPONLY = False        # keep False if you use JS to read CSRF token; set True only if you never read it in JS
+SECURE_SSL_REDIRECT = True          # redirect HTTP -> HTTPS (requires HTTPS configured)
+
+# HSTS (HTTP Strict Transport Security)
+SECURE_HSTS_SECONDS = 31536000      # 1 year; set lower while testing
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+
+# Browser protections
+SECURE_BROWSER_XSS_FILTER = True    # X-XSS-Protection header
+SECURE_CONTENT_TYPE_NOSNIFF = True  # X-Content-Type-Options: nosniff
+X_FRAME_OPTIONS = "DENY"            # Clickjacking protection
+
+# Other useful options
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")  # if behind a proxy/load balancer
+SECURE_REFERRER_POLICY = "same-origin"
 
 ALLOWED_HOSTS = []
 
@@ -38,6 +58,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "bookshelf",
+    "csp",
 ]
 
 MIDDLEWARE = [
@@ -48,7 +69,15 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "csp.middleware.CSPMiddleware",
 ]
+
+# Example policy (tight by default)
+CSP_DEFAULT_SRC = ("'self'",)
+CSP_SCRIPT_SRC = ("'self'",)
+CSP_STYLE_SRC = ("'self'", "https://fonts.googleapis.com")  # if you use Google fonts
+CSP_IMG_SRC = ("'self'", "data:")
+CSP_FONT_SRC = ("'self'", "https://fonts.gstatic.com")
 
 ROOT_URLCONF = "LibraryProject.urls"
 
