@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import CustomUser
 
-class ModelAdmin(UserAdmin):
+class CustomUserAdmin(UserAdmin):
     model = CustomUser
 
     # fields that show up in admin list page
@@ -30,4 +30,4 @@ class ModelAdmin(UserAdmin):
     search_fields = ("email",)
     ordering = ("email",)
 
-admin.site.register(CustomUser, ModelAdmin)
+admin.site.register(CustomUser, CustomUserAdmin)
