@@ -54,3 +54,27 @@ This Django blog application uses Django's built-in authentication framework to 
 1. Start the server:
 ```bash
 python manage.py runserver
+```
+
+# Blog Post Management Documentation
+
+## CRUD Overview
+- **ListView**: `/posts/` – shows all posts
+- **DetailView**: `/posts/<id>/` – shows a single post
+- **CreateView**: `/posts/new/` – authenticated users can create
+- **UpdateView**: `/posts/<id>/edit/` – only the post author
+- **DeleteView**: `/posts/<id>/delete/` – only the post author
+
+## Permissions
+- Only logged-in users can create posts.
+- Only authors can edit or delete their posts.
+- List and detail views accessible to everyone.
+
+## Templates
+- `post_list.html`, `post_detail.html`, `post_form.html`, `post_confirm_delete.html`
+- Integrates with CSS for styling
+
+## Testing
+1. Visit `/posts/` and confirm all posts display.
+2. Create, edit, and delete posts with a logged-in user.
+3. Test unauthorized access by visiting create/edit/delete as a logged-out user.
