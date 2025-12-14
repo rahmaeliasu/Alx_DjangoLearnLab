@@ -147,3 +147,19 @@ The API provides full CRUD capabilities for Posts and Comments.
   "title": "My First Post",
   "content": "This is the content of my social media post."
 }
+```
+
+## 5. Follow System & Feed
+
+Users can follow one another to curate a personalized content feed.
+
+### Follow Management
+* **Follow a User:** `POST /api/accounts/follow/<user_id>/`
+    * Adds the target user to your following list.
+* **Unfollow a User:** `POST /api/accounts/unfollow/<user_id>/`
+    * Removes the target user from your following list.
+
+### Dynamic Feed
+* **View Feed:** `GET /api/posts/feed/`
+    * Returns a paginated list of posts **only** from users you follow.
+    * Ordered by newest first.
