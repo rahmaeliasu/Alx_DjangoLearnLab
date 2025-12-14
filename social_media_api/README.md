@@ -115,3 +115,35 @@ View or update your own profile details. **You must include the token in the hea
 * **Response:** Returns the user's full profile details including follower counts.
 
 ---
+
+## 4. Posts & Comments API
+
+The API provides full CRUD capabilities for Posts and Comments.
+**Pagination:** Results are paginated (10 items per page).
+**Filtering:** Posts can be searched by title or content.
+
+### Post Endpoints
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/api/posts/` | List all posts. |
+| `GET` | `/api/posts/?search=keyword` | Search posts by title/content. |
+| `POST` | `/api/posts/` | Create a new post (Auth required). |
+| `GET` | `/api/posts/{id}/` | Retrieve a single post. |
+| `PUT` | `/api/posts/{id}/` | Update a post (Author only). |
+| `DELETE` | `/api/posts/{id}/` | Delete a post (Author only). |
+
+### Comment Endpoints
+* `GET /api/comments/`: List all comments.
+* `POST /api/comments/`: Create a comment. Requires `post` ID in body.
+* `PUT /api/comments/{id}/`: Update a comment (Author only).
+* `DELETE /api/comments/{id}/`: Delete a comment (Author only).
+
+### Example: Create a Post
+**POST** `/api/posts/`
+**Header:** `Authorization: Token <your_token>`
+**Body:**
+```json
+{
+  "title": "My First Post",
+  "content": "This is the content of my social media post."
+}
