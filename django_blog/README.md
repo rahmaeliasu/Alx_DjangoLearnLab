@@ -106,3 +106,24 @@ The comment system allows users to interact with blog posts by reading and posti
 2. Post a comment while logged in
 3. Edit and delete your comment
 4. Attempt unauthorized edits with a different user
+
+## Tagging and Search Features
+
+### Overview
+The blog includes tagging and search functionality to help organize posts and make content easy to discover. Posts can be assigned multiple tags, and users can search for posts using keywords or tag names.
+
+---
+
+## Tagging System
+
+### Adding Tags to a Post
+- When creating or editing a blog post, users can add tags using the **Tags** input field.
+- Tags are entered as **comma-separated values**.
+
+**Example:**
+
+### How Tags Work
+- Tags are automatically created if they do not already exist.
+- A post can have multiple tags.
+- A single tag can be associated with multiple posts.
+- When editing a post, existing tags appear in the tags field and can be modified.
