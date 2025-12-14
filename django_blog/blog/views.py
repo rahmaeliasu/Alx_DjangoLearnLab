@@ -118,7 +118,7 @@ class SearchResultsView(ListView):
         return Post.objects.none()
 
 
-class PostsByTagView(ListView):
+class PostByTagListView(ListView):
     model = Post
     template_name = 'blog/posts_by_tag.html'
     context_object_name = 'posts'
