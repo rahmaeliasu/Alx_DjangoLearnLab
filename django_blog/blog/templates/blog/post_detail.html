@@ -10,16 +10,13 @@
 {% endif %}
 
 <p>
-    Tags:
-    {% for tag in post.tags.all %}
-        <a href="{% url 'posts-by-tag' tag.name %}">#{{ tag.name }}</a>
-    {% empty %}
-        No tags
-    {% endfor %}
+  Tags: {% for tag in post.tags.all %}
+  <a href="{% url 'posts-by-tag' tag.name %}">#{{ tag.name }}</a>
+  {% empty %} No tags {% endfor %}
 </p>
-
-
-{% for comment in object.comments.all %}
+{% for tag in post.tags.all %}
+<a href="{% url 'posts-by-tag' tag.slug %}"> #{{ tag.name }} </a>
+{% endfor %} {% for comment in object.comments.all %}
 <div class="comment">
   <p>{{ comment.content }}</p>
   <small
@@ -33,15 +30,11 @@
 </div>
 {% empty %}
 <p>No comments yet.</p>
-{% endfor %}
-
-{% if user.is_authenticated %}
+{% endfor %} {% if user.is_authenticated %}
 <form method="post" action="{% url 'comment-create' post.pk %}">
   {% csrf_token %} {{ form.as_p }}
   <button type="submit">Post Comment</button>
 </form>
 {% else %}
 <p><a href="{% url 'login' %}">Login</a> to comment.</p>
-{% endif %}
-
-{% endblock %}
+{% endif %} {% endblock %}

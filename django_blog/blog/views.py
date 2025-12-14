@@ -4,6 +4,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Q
+from taggit.models import Tag
 
 from .models import Post, Comment, Tag
 from .forms import CustomUserCreationForm, UserUpdateForm, ProfileUpdateForm, CommentForm, PostForm
@@ -123,11 +124,13 @@ class PostsByTagView(ListView):
     context_object_name = 'posts'
 
     def get_queryset(self):
-        return Post.objects.filter(tags__name=self.kwargs['tag_name'])
+        return Post.objects.filter(
+            tags__slug=self.kwargs['tag_slug']
+        )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['tag'] = self.kwargs['tag_name']
+        context['tag'] = self.kwargs['tag_slug']
         return context
 
 
