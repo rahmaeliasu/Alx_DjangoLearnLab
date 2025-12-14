@@ -78,3 +78,31 @@ python manage.py runserver
 1. Visit `/posts/` and confirm all posts display.
 2. Create, edit, and delete posts with a logged-in user.
 3. Test unauthorized access by visiting create/edit/delete as a logged-out user.
+
+
+# Comment System Documentation
+
+## Overview
+The comment system allows users to interact with blog posts by reading and posting comments. Authenticated users can create, edit, and delete their own comments.
+
+## Features
+- Display comments under each blog post
+- Authenticated users can post comments
+- Comment authors can edit or delete their comments
+- Permissions enforced using Django authentication
+
+## URLs
+- Add comment: `/posts/<post_id>/comments/new/`
+- Edit comment: `/comments/<comment_id>/edit/`
+- Delete comment: `/comments/<comment_id>/delete/`
+
+## Permissions
+- Only logged-in users can post comments
+- Only the author of a comment can edit or delete it
+- All users can view comments
+
+## Testing
+1. Visit a blog post detail page
+2. Post a comment while logged in
+3. Edit and delete your comment
+4. Attempt unauthorized edits with a different user
