@@ -1,37 +1,31 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <h2>{{ object.title }}</h2>
 <p>{{ object.content }}</p>
 
 <p>Author: {{ object.author.username }}</p>
 {% if user == object.author %}
-    <a href="{% url 'post-update' object.pk %}">Edit</a>
-    <a href="{% url 'post-delete' object.pk %}">Delete</a>
-{% endif %}
+<a href="{% url 'post-update' object.pk %}">Edit</a>
+<a href="{% url 'post-delete' object.pk %}">Delete</a>
+{% endif %} {% for comment in object.comments.all %}
+<div class="comment">
+  <p>{{ comment.content }}</p>
+  <small
+    >By {{ comment.author }} • {{ comment.created_at|date:"M d, Y" }}</small
+  >
 
-{% for comment in object.comments.all %}
-  <div class="comment">
-    <p>{{ comment.content }}</p>
-    <small>By {{ comment.author }} • {{ comment.created_at|date:"M d, Y" }}</small>
-
-    {% if user == comment.author %}
-      <a href="{% url 'comment-edit' comment.pk %}">Edit</a>
-      <a href="{% url 'comment-delete' comment.pk %}">Delete</a>
-    {% endif %}
-  </div>
+  {% if user == comment.author %}
+  <a href="{% url 'comment-edit' comment.pk %}">Edit</a>
+  <a href="{% url 'comment-delete' comment.pk %}">Delete</a>
+  {% endif %}
+</div>
 {% empty %}
-  <p>No comments yet.</p>
-{% endfor %}
-
-{% if user.is_authenticated %}
-  <form method="POST" action="{% url 'comment-add' object.id %}">
-    {% csrf_token %}
-    {{ comment_form.as_p }}
-    <button type="submit">Post Comment</button>
-  </form>
+<p>No comments yet.</p>
+{% endfor %} {% if user.is_authenticated %}
+<form method="post" action="{% url 'comment-create' post.pk %}">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Post Comment</button>
+</form>
 {% else %}
-  <p><a href="{% url 'login' %}">Login</a> to comment.</p>
-{% endif %}
-
-{% endblock %}
+<p><a href="{% url 'login' %}">Login</a> to comment.</p>
+{% endif %} {% endblock %}
