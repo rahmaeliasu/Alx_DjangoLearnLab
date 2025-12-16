@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from .serializers import UserRegistrationSerializer, UserDetailSerializer
+from notifications.models import Notification
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
 
@@ -21,6 +22,14 @@ class FollowUserView(generics.GenericAPIView):
             return Response({"error": "You cannot follow yourself"}, status=status.HTTP_400_BAD_REQUEST)
 
         request.user.following.add(user_to_follow)
+
+        Notification.objects.create(
+            recipient=user_to_follow,
+            actor=request.user,
+            verb="started following you",
+            target=request.user 
+        )
+
         return Response({"message": f"You are now following {user_to_follow.username}"}, status=status.HTTP_200_OK)
 
 class UnfollowUserView(generics.GenericAPIView):

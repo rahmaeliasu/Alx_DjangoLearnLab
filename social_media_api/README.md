@@ -163,3 +163,13 @@ Users can follow one another to curate a personalized content feed.
 * **View Feed:** `GET /api/posts/feed/`
     * Returns a paginated list of posts **only** from users you follow.
     * Ordered by newest first.
+
+## 6. Likes & Notifications
+
+### Interaction Endpoints
+* **Like a Post:** `POST /api/posts/{id}/like/`
+* **Unlike a Post:** `POST /api/posts/{id}/unlike/`
+
+### Notifications
+* **Get Notifications:** `GET /api/notifications/`
+    * Returns a list of alerts for new followers, likes, and comments.
