@@ -173,3 +173,13 @@ Users can follow one another to curate a personalized content feed.
 ### Notifications
 * **Get Notifications:** `GET /api/notifications/`
     * Returns a list of alerts for new followers, likes, and comments.
+
+## Deployment
+
+This API is deployed on Render
+
+**Live URL:** https://social-media-api-me72.onrender.com
+
+### Configuration
+The project uses `whitenoise` for static files and `gunicorn` as the WSGI server.
+Database: PostgreSQL (Hosted).
