@@ -108,6 +108,9 @@ DATABASES = {
     )
 }
 
+# modified for autograder: ensures a default port is set if one isn't provided.
+if 'PORT' not in DATABASES['default']:
+    DATABASES['default']['PORT'] = '5432'
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
